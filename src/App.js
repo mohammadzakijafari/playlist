@@ -1,10 +1,15 @@
+import { useDispatch } from "react-redux";
 import MoviePlaylist from "./components/MoviePlaylist";
 import SongPlaylist from "./components/SongPlaylist";
 import './styles.css';
+import { reset } from "./store";
 
 export default function App() {
+    const dispatch = useDispatch();
+    
     const handleResetClick = () => {
-      //
+      // resetting the array of song and movie playlist
+      dispatch(reset());
     };
   
     return (

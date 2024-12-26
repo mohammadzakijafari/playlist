@@ -1,32 +1,41 @@
+import { useDispatch, useSelector } from "react-redux";
 import { createRandomMovie } from "../data";
+import { addMovie, removeMovie } from "../store";
 
 function MoviePlaylist() {
-  // To Do:
-  // Get list of movies
-  const moviePlaylist = [];
+    // initializing dispatch
+    const dispatch = useDispatch();
 
-  const handleMovieAdd = (movie) => {
-    // To Do:
-    // Add movie to list of movies
-  };
-  const handleMovieRemove = (movie) => {
-    // To Do:
-    // Remove movie from list of movies
-  };
+    // Get list of movies
+    const moviePlaylist = useSelector((state) => {
+        return state.movies;
+    });
 
-  const renderedMovies = moviePlaylist.map((movie) => {
-    return (
-      <li key={movie}>
-        {movie}
-        <button
-          onClick={() => handleMovieRemove(movie)}
-          className="px-6 py-3 rounded bg-blue-700 text-white"
-        >
-          X
-        </button>
-      </li>
-    );
-  });
+    const handleMovieAdd = (movie) => {
+        // Add movie to list of movies
+        dispatch(addMovie(movie));
+    };
+    const handleMovieRemove = (movie) => {
+        // Remove movie from list of movies
+        dispatch(removeMovie(movie));
+    };
+
+    const renderedMovies = moviePlaylist.map((movie) => {
+        return (
+            <div className="" key = { movie }>
+                <li key={movie} className="flex items-center justify-between p-5">
+                    {movie}
+                    <button
+                        onClick={() => handleMovieRemove(movie)}
+                        className="px-6 py-3 rounded bg-red-700 text-white"
+                    >
+                        X
+                    </button>
+                </li>
+                <hr />
+            </div>
+        );
+    });
 
   return (
     <div className="p-10">
